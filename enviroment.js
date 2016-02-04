@@ -8,7 +8,8 @@
 //////////
 // MAIN //
 //////////
-function MAIN() {
+function MAIN()
+{
 // standard global variables
 var container, scene, camera, renderer, controls, stats;
 var keyboard = new THREEx.KeyboardState();
@@ -107,10 +108,10 @@ function init()
 	///////////
 
 	// create a light
-	var light = new THREE.PointLight(0xffffff);
-	light.position.set(0,250,0);
-	scene.add(light);
-	var ambientLight = new THREE.AmbientLight(0x111111);
+	//var light = new THREE.PointLight(0xffffff);
+	//light.position.set(0,250,0);
+	//scene.add(light);
+	//var ambientLight = new THREE.AmbientLight(0x111111);
 	// scene.add(ambientLight);
 
 	//////////////
@@ -121,33 +122,6 @@ function init()
 	//  a collection of points ("geometry") and
 	//  a set of surface parameters ("material")
 
-	// Sphere parameters: radius, segments along width, segments along height
-	var sphereGeometry = new THREE.SphereGeometry( 50, 32, 16 );
-	// use a "lambert" material rather than "basic" for realistic lighting.
-	//   (don't forget to add (at least one) light!)
-	var sphereMaterial = new THREE.MeshLambertMaterial( {color: 0x8888ff} );
-	var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-	sphere.position.set(100, 50, -50);
-	scene.add(sphere);
-
-	// Create an array of materials to be used in a cube, one for each side
-	var cubeMaterialArray = [];
-	// order to add materials: x+,x-,y+,y-,z+,z-
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xff3333 } ) );
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xff8800 } ) );
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xffff33 } ) );
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x33ff33 } ) );
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x3333ff } ) );
-	cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x8833ff } ) );
-	var cubeMaterials = new THREE.MeshFaceMaterial( cubeMaterialArray );
-	// Cube parameters: width (x), height (y), depth (z),
-	//        (optional) segments along x, segments along y, segments along z
-	var cubeGeometry = new THREE.CubeGeometry( 100, 100, 100, 1, 1, 1 );
-	// using THREE.MeshFaceMaterial() in the constructor below
-	//   causes the mesh to use the materials stored in the geometry
-	cube = new THREE.Mesh( cubeGeometry, cubeMaterials );
-	cube.position.set(-100, 50, -50);
-	scene.add( cube );
 
 	// create a set of coordinate axes to help orient user
 	//    specify length in pixels in each direction
@@ -159,9 +133,9 @@ function init()
 	///////////
 
 	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
+	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/grass.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	floorTexture.repeat.set( 10, 10 );
+	floorTexture.repeat.set( 1, 1 );
 	// DoubleSide: render texture on both sides of mesh
 	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
@@ -185,7 +159,7 @@ function init()
 	// scene.add(skyBox);
 
 	// fog must be added to scene before first render
-	scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
+	scene.fog = new THREE.FogExp2( 0x9999ff, 0.003500 );
 }
 
 function animate()

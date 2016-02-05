@@ -154,12 +154,12 @@ function init()
 	// make sure the camera's "far" value is large enough so that it will render the skyBox!
 	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
 	// BackSide: render faces from inside of the cube, instead of from outside (default).
-	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.BackSide } );
+	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, side: THREE.BackSide } );
 	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
 	// scene.add(skyBox);
 
 	// fog must be added to scene before first render
-	scene.fog = new THREE.FogExp2( 0x9999ff, 0.003500 );
+	scene.fog = new THREE.FogExp2( 0x000000, 0.003500 );
 }
 
 function animate()

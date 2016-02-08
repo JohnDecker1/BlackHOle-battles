@@ -17,7 +17,8 @@ var clock = new THREE.Clock();
 
 // custom global variables
 var cube;
-
+var light;
+    
 // initialization
 init();
 
@@ -108,12 +109,22 @@ function init()
 	///////////
 
 	// create a light
-	//var light = new THREE.PointLight(0xffffff);
-	//light.position.set(0,250,0);
-	//scene.add(light);
-	var ambientLight = new THREE.AmbientLight(0x444444);
-    scene.add(ambientLight);
+	light = new THREE.PointLight(0xffffff, 3.0, 300);
+	light.position.set(50,50,50);
+	scene.add(light);
+	//var ambientLight = new THREE.AmbientLight(0x444444);
+    //scene.add(ambientLight);
 
+    var PI2 = Math.PI * 2;
+    var program = function ( context ) {
+        context.beginPath();
+        context.arc( 0, 0, 0.5, 0, PI2, true );
+        context.fill();
+    };
+    
+    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: 0xff0040, program: program } ) );
+    light.add( sprite );
+    
 	//////////////
 	// GEOMETRY //
 	//////////////
@@ -137,7 +148,7 @@ function init()
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
 	floorTexture.repeat.set( 1, 1 );
 	// DoubleSide: render texture on both sides of mesh
-	var floorMaterial = new THREE.MeshLambertMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+	var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
@@ -174,11 +185,19 @@ function update()
 	// delta = change in time since last call (in seconds)
 	var delta = clock.getDelta();
 
+    var time = Date.now() * 0.0005;
+
+    //if ( mesh ) mesh.rotation.y -= 0.01;
+
+	light.position.x = Math.sin( time * 0.7 ) * 30;
+	light.position.y = Math.cos( time * 0.5 ) * 40;
+	light.position.z = Math.cos( time * 0.3 ) * 30;
+    
 	// functionality provided by THREEx.KeyboardState.js
-	if ( keyboard.pressed("1") )
-		document.getElementById('message').innerHTML = ' Have a nice day! - 1';
-	if ( keyboard.pressed("2") )
-		document.getElementById('message').innerHTML = ' Have a nice day! - 2 ';
+	//if ( keyboard.pressed("1") )
+	//	document.getElementById('message').innerHTML = ' Have a nice day! - 1';
+	//if ( keyboard.pressed("2") )
+	//	document.getElementById('message').innerHTML = ' Have a nice day! - 2 ';
 
 	controls.update();
 	stats.update();

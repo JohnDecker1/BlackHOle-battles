@@ -111,8 +111,8 @@ function init()
 	//var light = new THREE.PointLight(0xffffff);
 	//light.position.set(0,250,0);
 	//scene.add(light);
-	//var ambientLight = new THREE.AmbientLight(0x111111);
-	// scene.add(ambientLight);
+	var ambientLight = new THREE.AmbientLight(0x444444);
+    scene.add(ambientLight);
 
 	//////////////
 	// GEOMETRY //
@@ -137,7 +137,7 @@ function init()
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
 	floorTexture.repeat.set( 1, 1 );
 	// DoubleSide: render texture on both sides of mesh
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+	var floorMaterial = new THREE.MeshLambertMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
@@ -156,10 +156,10 @@ function init()
 	// BackSide: render faces from inside of the cube, instead of from outside (default).
 	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, side: THREE.BackSide } );
 	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-	// scene.add(skyBox);
+	scene.add(skyBox);
 
 	// fog must be added to scene before first render
-	scene.fog = new THREE.FogExp2( 0x000000, 0.003500 );
+	//scene.fog = new THREE.FogExp2( 0x000000, 0.003500 );
 }
 
 function animate()

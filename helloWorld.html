@@ -88,8 +88,29 @@ function init()
 	var loader = new THREE.ObjectLoader();
 	loader.load( "objects/tank.json", function (obj) {
 		objTank = obj;
+		objTank.material = new THREE.MeshLambertMaterial(
+				{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
 		scene.add(objTank);
 	} );
+
+
+	var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
+
+	light1 = new THREE.PointLight( 0xff0040, 2, 50 );
+	light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+	scene.add( light1 );
+
+	light2 = new THREE.PointLight( 0x0040ff, 2, 50 );
+	light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x0040ff } ) ) );
+	scene.add( light2 );
+
+	light3 = new THREE.PointLight( 0x80ff80, 2, 50 );
+	light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x80ff80 } ) ) );
+	scene.add( light3 );
+
+	light4 = new THREE.PointLight( 0xffaa00, 2, 50 );
+	light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
+	scene.add( light4 );
 	//////////////
 	// RENDERER //
 	//////////////
@@ -99,6 +120,24 @@ function init()
 		renderer = new THREE.WebGLRenderer( {antialias:true} );
 	else
 		renderer = new THREE.CanvasRenderer();
+
+	var time = Date.now() * 0.0005;
+
+	light1.position.x = Math.sin( time * 0.7 ) * 30;
+	light1.position.y = Math.cos( time * 0.5 ) * 40;
+	light1.position.z = Math.cos( time * 0.3 ) * 30;
+
+	light2.position.x = Math.cos( time * 0.3 ) * 30;
+	light2.position.y = Math.sin( time * 0.5 ) * 40;
+	light2.position.z = Math.sin( time * 0.7 ) * 30;
+
+	light3.position.x = Math.sin( time * 0.7 ) * 30;
+	light3.position.y = Math.cos( time * 0.3 ) * 40;
+	light3.position.z = Math.sin( time * 0.5 ) * 30;
+
+	light4.position.x = Math.sin( time * 0.3 ) * 30;
+	light4.position.y = Math.cos( time * 0.7 ) * 40;
+	light4.position.z = Math.sin( time * 0.5 ) * 30;
 
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -145,11 +184,11 @@ function init()
 	///////////
 
 	// create a light
-	var light = new THREE.PointLight(0xffffff);
-	light.position.set(0,250,0);
-	scene.add(light);
-	var ambientLight = new THREE.AmbientLight(0x111111);
-	// scene.add(ambientLight);
+	//var light = new THREE.PointLight(0xffffff);
+	//light.position.set(0,250,0);
+	//scene.add(light);
+	//var ambientLight = new THREE.AmbientLight(0x111111);
+	//scene.add(ambientLight);
 
 	//////////////
 	// GEOMETRY //
@@ -165,7 +204,7 @@ function init()
 	//   (don't forget to add (at least one) light!)
 	var sphereMaterial = new THREE.MeshLambertMaterial( {color: 0x8888ff} );
 	var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-	sphere.position.set(100, 50, -50);
+	sphere.position.set(200, 50, -50);
 	scene.add(sphere);
 
 	// Create an array of materials to be used in a cube, one for each side
@@ -184,7 +223,7 @@ function init()
 	// using THREE.MeshFaceMaterial() in the constructor below
 	//   causes the mesh to use the materials stored in the geometry
 	cube = new THREE.Mesh( cubeGeometry, cubeMaterials );
-	cube.position.set(-100, 50, -50);
+	cube.position.set(-200, 50, -50);
 	scene.add( cube );
 
 	// create a set of coordinate axes to help orient user
@@ -197,9 +236,9 @@ function init()
 	///////////
 
 	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
+	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/grass.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	floorTexture.repeat.set( 10, 10 );
+	//floorTexture.repeat.set( 1, 1 );
 	// DoubleSide: render texture on both sides of mesh
 	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);

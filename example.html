@@ -35,10 +35,6 @@
 <body>
 
 <div id="container"></div>
-<div id="info">
-    <a href="http://threejs.org" target="_blank">three.js</a> - point lights WebGL demo.<br />
-    Walt Disney head by <a href="http://davidoreilly.com/post/18087489343/disneyhead" target="_blank">David OReilly</a>
-</div>
 
 <script src="three.js-master/build/three.min.js"></script>
 
@@ -79,7 +75,7 @@
 
         };
 
-        loader.load( "obj/walt/WaltHead_bin.js", callback );
+      loader.load( "objects/tank.json", callback );
 
         var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
 

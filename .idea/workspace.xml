@@ -2,125 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d738a9f4-41ba-4776-a59c-e6c4683d9e45" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/BlackHOle-battles.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/AnimationClipCreator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/BlendCharacter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/BlendCharacterGui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/BufferGeometryUtils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Car.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Cloth.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/CurveExtras.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Detector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/GPUParticleSystem.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Gyroscope.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/ImprovedNoise.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/MD2Character.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/MD2CharacterComplex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/MarchingCubes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Mirror.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/MorphAnimMesh.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/MorphAnimation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Ocean.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/Octree.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/cameras/CombinedCamera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/DeviceOrientationControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/DragControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/EditorControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/FirstPersonControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/FlyControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/MouseControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/OrbitControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/OrthographicTrackballControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/PointerLockControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/TrackballControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/TransformControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/controls/VRControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/crossfade/gui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/crossfade/scenes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/crossfade/transition.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/curves/NURBSCurve.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/curves/NURBSSurface.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/curves/NURBSUtils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/effects/AnaglyphEffect.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/effects/AsciiEffect.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/effects/ParallaxBarrierEffect.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/effects/StereoEffect.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/effects/VREffect.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/exporters/OBJExporter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/exporters/STLBinaryExporter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/exporters/STLExporter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/exporters/TypedGeometryExporter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/ConvexGeometry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/DecalGeometry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/TeapotBufferGeometry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/TextGeometry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/hilbert2D.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/geometries/hilbert3D.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/dat.gui.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/jszip.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/msgpack-js.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/pnltri.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/require.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/stats.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/system.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/libs/tween.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/AMFLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/AWDLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/AssimpJSONLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/BabylonLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/BinaryLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ColladaLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ColladaLoader2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/DDSLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/KMZLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/MD2Loader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/MTLLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/OBJLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/OBJMTLLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/PDBLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/PLYLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/PVRLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/RGBELoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/STLLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/SVGLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/TGALoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/UTF8Loader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/VRMLLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/VTKLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/collada/Animation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/collada/AnimationHandler.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/collada/KeyFrameAnimation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/CTMLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/CTMWorker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/ctm.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/license/OpenCTM.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/license/js-lzma.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/license/js-openctm.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/ctm/lzma.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/deprecated/SceneLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/gltf/glTF-parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/gltf/glTFAnimation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/gltf/glTFLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/gltf/glTFLoaderUtils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/sea3d/SEA3D.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/sea3d/SEA3DDeflate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/sea3d/SEA3DLZMA.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/loaders/sea3d/SEA3DLoader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/math/ColorConverter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/math/Lut.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/modifiers/ExplodeModifier.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/modifiers/SubdivisionModifier.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/modifiers/TessellateModifier.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js.new/objects/ShadowMesh.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newfile.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blackHole.html" afterPath="$PROJECT_DIR$/blackHole.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example.html" afterPath="$PROJECT_DIR$/example.html" />
     </list>
     <ignored path="BlackHOle-battles.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -166,8 +49,8 @@
       <file leaf-file-name="example.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3617021">
-              <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.5604396">
+              <caret line="77" column="41" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -336,20 +219,20 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -416,8 +299,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3617021">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.5604396">
+          <caret line="77" column="41" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
           <folding />
         </state>
       </provider>

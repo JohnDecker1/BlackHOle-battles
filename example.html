@@ -65,17 +65,21 @@
 
         scene = new THREE.Scene();
 
-        loader = new THREE.BinaryLoader();
+       // loader = new THREE.BinaryLoader();
 
-        var callback = function( geometry ) {
+//        var callback = function( geometry ) {
+//
+  //          object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial( { color: 0x555555, specular: 0x111111, shininess: 50 }  )  );
+    //        object.scale.x = object.scale.y = object.scale.z = 0.80;
+      //      scene.add( object );
 
-            object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial( { color: 0x555555, specular: 0x111111, shininess: 50 }  )  );
-            object.scale.x = object.scale.y = object.scale.z = 0.80;
-            scene.add( object );
-
-        };
-
-      loader.load( "objects/tank.json", callback );
+        //};
+        var objTank;
+        var loader = new THREE.ObjectLoader();
+      loader.load( "objects/tank.json", function (obj) {
+          objTank = obj;
+        scene.add(objTank);
+      } );
 
         var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
 

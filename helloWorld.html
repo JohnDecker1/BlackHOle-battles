@@ -86,7 +86,7 @@ function init()
 	camera.lookAt(scene.position);
 	var objTank;
 	var loader = new THREE.ObjectLoader();
-	loader.load( "objects/tank.json", function (obj) {
+	loader.load( "objects/Batmobile.obj", function (obj) {
 		objTank = obj;
 		objTank.material = new THREE.MeshLambertMaterial(
 				{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
@@ -111,6 +111,7 @@ function init()
 	light4 = new THREE.PointLight( 0xffaa00, 2, 50 );
 	light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
 	scene.add( light4 );
+
 	//////////////
 	// RENDERER //
 	//////////////

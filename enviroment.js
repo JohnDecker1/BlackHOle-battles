@@ -133,11 +133,14 @@ function init()
 	//  a collection of points ("geometry") and
 	//  a set of surface parameters ("material")
 
-
-	// create a set of coordinate axes to help orient user
-	//    specify length in pixels in each direction
-	var axes = new THREE.AxisHelper(100);
-	scene.add( axes );
+	var objTank;
+	var loader = new THREE.ObjectLoader();
+	loader.load( "objects/tank.json", function (obj) {
+		objTank = obj;
+		objTank.material = new THREE.MeshLambertMaterial(
+			{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
+		scene.add(objTank);
+	} );
 
 	///////////
 	// FLOOR //

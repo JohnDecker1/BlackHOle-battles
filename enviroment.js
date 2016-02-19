@@ -18,6 +18,7 @@ var clock = new THREE.Clock();
 // custom global variables
 var cube;
 var light;
+var lightSphere;
     
 // initialization
 init();
@@ -122,8 +123,11 @@ function init()
         context.fill();
     };
     
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: 0xff0040, program: program } ) );
-    light.add( sprite );
+    var sphereLightMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+    var sphereLightGeometry = new THREE.SphereGeometry(5, 16, 32);
+    sphereLight = new THREE.Mesh(sphereLightGeometry, sphereLightMaterial);
+    sphereLight.position = (light.position);
+    light.add( sphereLight );
     
 	//////////////
 	// GEOMETRY //
@@ -153,6 +157,7 @@ function init()
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
 	floor.rotation.x = Math.PI / 2;
+    floor.receiveShadows = true;
 	scene.add(floor);
 
 	/////////

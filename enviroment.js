@@ -141,8 +141,8 @@ function init()
 	var loader = new THREE.ObjectLoader();
 	loader.load( "objects/tank.json", function (obj) {
 		objTank = obj;
-		objTank.material = new THREE.MeshLambertMaterial(
-			{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
+		objTank.material = new THREE.MeshFaceMaterial		(
+			{ color: 0x000000, vertexColors: THREE.FaceColors} );
 		scene.add(objTank);
 	} );
 

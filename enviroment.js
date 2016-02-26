@@ -16,9 +16,7 @@ var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 
 // custom global variables
-var cube;
 var light;
-var lightSphere;
     
 // initialization
 init();
@@ -136,15 +134,15 @@ function init()
 	// most objects displayed are a "mesh":
 	//  a collection of points ("geometry") and
 	//  a set of surface parameters ("material")
-
-	var objTank;
 	var loader = new THREE.ObjectLoader();
-	loader.load( "objects/tank.json", function (obj) {
+	loader.load( "objects/batmobile.json", function (obj) {
 		objTank = obj;
 		objTank.material = new THREE.MeshLambertMaterial(
 			{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
 		scene.add(objTank);
 	} );
+
+		var objTank;
 
 	///////////
 	// FLOOR //
@@ -194,18 +192,23 @@ function update()
 	var delta = clock.getDelta();
 
     var time = Date.now() * 0.0005;
+	var moveDistance = 200 * delta; // 200 pixels per second
+	var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
 
     //if ( mesh ) mesh.rotation.y -= 0.01;
 
 	light.position.x = Math.sin( time * 0.7 ) * 30;
 	light.position.y = Math.cos( time * 0.5 ) * 40;
 	light.position.z = Math.cos( time * 0.3 ) * 30;
-    
-	// functionality provided by THREEx.KeyboardState.js
-	//if ( keyboard.pressed("1") )
-	//	document.getElementById('message').innerHTML = ' Have a nice day! - 1';
-	//if ( keyboard.pressed("2") )
-	//	document.getElementById('message').innerHTML = ' Have a nice day! - 2 ';
+
+
+
+	var relativeCameraOffset = new THREE.Vector3(0,50,200);
+	var cameraOffset = relativeCameraOffset.applyMatrix4( MovingCube.matrixWorld );
+	camera.position.x = cameraOffset.x;
+	camera.position.y = cameraOffset.y;
+	camera.position.z = cameraOffset.z;
+	camera.lookAt( MovingCube.position );
 
 	controls.update();
 	stats.update();

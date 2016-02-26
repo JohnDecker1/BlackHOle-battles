@@ -17,6 +17,7 @@ var clock = new THREE.Clock();
 
 // custom global variables
 var light;
+var sphereLight;
     
 // initialization
 init();
@@ -128,7 +129,7 @@ function init()
     sphereLight = new THREE.Mesh(sphereLightGeometry, sphereLightMaterial);
     sphereLight.position = (light.position);
     light.add( sphereLight );
-    
+
 	//////////////
 	// GEOMETRY //
 	//////////////
@@ -136,7 +137,6 @@ function init()
 	// most objects displayed are a "mesh":
 	//  a collection of points ("geometry") and
 	//  a set of surface parameters ("material")
-<
 	// create an array with six textures for a cool cube
 	var materialArray = [];
 	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xpos.png' ) }));

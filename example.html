@@ -1,161 +1,202 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <title>three.js webgl - lights - point lights</title>
+    <title>Chase Camera (Three.js)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-        body {
-            background-color: #000;
-            margin: 0px;
-            overflow: hidden;
-        }
-
-        #info {
-            position: absolute;
-            top: 0px; width: 100%;
-            color: #ffffff;
-            padding: 5px;
-            font-family: Monospace;
-            font-size: 13px;
-            text-align: center;
-        }
-
-        a {
-            color: #ff0080;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #0080ff;
-        }
-    </style>
+    <link rel=stylesheet href="css/base.css"/>
 </head>
 <body>
 
-<div id="container"></div>
+<script src="js/Three.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/Stats.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/THREEx.KeyboardState.js"></script>
+<script src="js/THREEx.FullScreen.js"></script>
+<script src="js/THREEx.WindowResize.js"></script>
 
-<script src="three.js-master/build/three.min.js"></script>
+<!-- jQuery code to display an information button and box when clicked. -->
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<link rel=stylesheet href="css/jquery-ui.css" />
+<link rel=stylesheet href="css/info.css"/>
+<script src="js/info.js"></script>
+<div id="infoButton"></div>
+<div id="infoBox" title="Demo Information">
+    Movement controls: <br/>
+    <ul>
+        <li>W/S: Translate Forward/Backward
+        <li>A/D: Rotate Left/Right
+        <li>Q/E: Translate Left/Right
+        <li>R/F: Rotate Up/Down
+        <li>Z: Reset position and rotation.
+    </ul>
+    This three.js demo is part of a collection at
+    <a href="http://stemkoski.github.io/Three.js/">http://stemkoski.github.io/Three.js/</a>
+</div>
+<!-- ------------------------------------------------------------ -->
 
-<script src="js.new/loaders/BinaryLoader.js"></script>
-
-<script src="js.new/Detector.js"></script>
-
+<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
 <script>
+    /*
+     Three.js "tutorials by example"
+     Author: Lee Stemkoski
+     Date: July 2013 (three.js v59dev)
+     */
 
-    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+    // MAIN
 
-    var camera, scene, renderer,
-            particle1, particle2, particle2,
-            light1, light2, light3, light4,
-            object, loader;
-
+    // standard global variables
+    var container, scene, camera, renderer, controls, stats;
+    var keyboard = new THREEx.KeyboardState();
     var clock = new THREE.Clock();
+    // custom global variables
+    var cube;
 
     init();
     animate();
 
-    function init() {
-
-        var container = document.getElementById( 'container' );
-
-        camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
-        camera.position.z = 100;
-
+    // FUNCTIONS
+    function init()
+    {
+        // SCENE
         scene = new THREE.Scene();
-
-       // loader = new THREE.BinaryLoader();
-
-//        var callback = function( geometry ) {
-//
-  //          object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial( { color: 0x555555, specular: 0x111111, shininess: 50 }  )  );
-    //        object.scale.x = object.scale.y = object.scale.z = 0.80;
-      //      scene.add( object );
-
-        //};
-        var objTank;
-        var loader = new THREE.ObjectLoader();
-      loader.load( "objects/tank.json", function (obj) {
-          objTank = obj;
-        scene.add(objTank);
-      } );
-
-        var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
-
-        light1 = new THREE.PointLight( 0xff0040, 2, 50 );
-        light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-        scene.add( light1 );
-
-        light2 = new THREE.PointLight( 0x0040ff, 2, 50 );
-        light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x0040ff } ) ) );
-        scene.add( light2 );
-
-        light3 = new THREE.PointLight( 0x80ff80, 2, 50 );
-        light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x80ff80 } ) ) );
-        scene.add( light3 );
-
-        light4 = new THREE.PointLight( 0xffaa00, 2, 50 );
-        light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
-        scene.add( light4 );
-
-        renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        // CAMERA
+        var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+        camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+        scene.add(camera);
+        camera.position.set(0,150,400);
+        camera.lookAt(scene.position);
+        // RENDERER
+        if ( Detector.webgl )
+            renderer = new THREE.WebGLRenderer( {antialias:true} );
+        else
+            renderer = new THREE.CanvasRenderer();
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        container = document.getElementById( 'ThreeJS' );
         container.appendChild( renderer.domElement );
+        // EVENTS
+        THREEx.WindowResize(renderer, camera);
+        THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
-        //
+        // CONTROLS
+        // MUST REMOVE THIS LINE!!!
+        // controls = ...
 
-        window.addEventListener( 'resize', onWindowResize, false );
+        // STATS
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.bottom = '0px';
+        stats.domElement.style.zIndex = 100;
+        container.appendChild( stats.domElement );
+        // LIGHT
+        var light = new THREE.PointLight(0xffffff);
+        light.position.set(0,250,0);
+        scene.add(light);
+        // FLOOR
+        var floorTexture = new THREE.ImageUtils.loadTexture( 'images/grass.jpg' );
+        floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+        floorTexture.repeat.set( 10, 10 );
+        var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+        var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
+        var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.position.y = -0.5;
+        floor.rotation.x = Math.PI / 2;
+        scene.add(floor);
+        // SKYBOX/FOG
+        var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
+        var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
+        var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
+        // scene.add(skyBox);
+        scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
+
+        ////////////
+        // CUSTOM //
+        ////////////
+
+        // create an array with six textures for a cool cube
+        var materialArray = [];
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xpos.png' ) }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xneg.png' ) }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/ypos.png' ) }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/yneg.png' ) }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zpos.png' ) }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zneg.png' ) }));
+        var MovingCubeMat = new THREE.MeshFaceMaterial(materialArray);
+        var MovingCubeGeom = new THREE.CubeGeometry( 50, 50, 50, 1, 1, 1, materialArray );
+        MovingCube = new THREE.Mesh( MovingCubeGeom, MovingCubeMat );
+        MovingCube.position.set(0, 25.1, 0);
+        scene.add( MovingCube );
 
     }
 
-    function onWindowResize() {
+    var MovingCube;
 
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize( window.innerWidth, window.innerHeight );
-
-    }
-
-    //
-
-    function animate() {
-
+    function animate()
+    {
         requestAnimationFrame( animate );
-
         render();
-
+        update();
     }
 
-    function render() {
+    function update()
+    {
+        var delta = clock.getDelta(); // seconds.
+        var moveDistance = 200 * delta; // 200 pixels per second
+        var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
 
-        var time = Date.now() * 0.0005;
-        var delta = clock.getDelta();
+        // local transformations
 
-        if( object ) object.rotation.y -= 0.5 * delta;
+        // move forwards/backwards/left/right
+        if ( keyboard.pressed("W") )
+            MovingCube.translateZ( -moveDistance );
+        if ( keyboard.pressed("S") )
+            MovingCube.translateZ(  moveDistance );
+        if ( keyboard.pressed("Q") )
+            MovingCube.translateX( -moveDistance );
+        if ( keyboard.pressed("E") )
+            MovingCube.translateX(  moveDistance );
 
-        light1.position.x = Math.sin( time * 0.7 ) * 30;
-        light1.position.y = Math.cos( time * 0.5 ) * 40;
-        light1.position.z = Math.cos( time * 0.3 ) * 30;
+        // rotate left/right/up/down
+        var rotation_matrix = new THREE.Matrix4().identity();
+        if ( keyboard.pressed("A") )
+            MovingCube.rotateOnAxis( new THREE.Vector3(0,1,0), rotateAngle);
+        if ( keyboard.pressed("D") )
+            MovingCube.rotateOnAxis( new THREE.Vector3(0,1,0), -rotateAngle);
+        if ( keyboard.pressed("R") )
+            MovingCube.rotateOnAxis( new THREE.Vector3(1,0,0), rotateAngle);
+        if ( keyboard.pressed("F") )
+            MovingCube.rotateOnAxis( new THREE.Vector3(1,0,0), -rotateAngle);
 
-        light2.position.x = Math.cos( time * 0.3 ) * 30;
-        light2.position.y = Math.sin( time * 0.5 ) * 40;
-        light2.position.z = Math.sin( time * 0.7 ) * 30;
+        if ( keyboard.pressed("Z") )
+        {
+            MovingCube.position.set(0,25.1,0);
+            MovingCube.rotation.set(0,0,0);
+        }
 
-        light3.position.x = Math.sin( time * 0.7 ) * 30;
-        light3.position.y = Math.cos( time * 0.3 ) * 40;
-        light3.position.z = Math.sin( time * 0.5 ) * 30;
+        var relativeCameraOffset = new THREE.Vector3(0,50,200);
 
-        light4.position.x = Math.sin( time * 0.3 ) * 30;
-        light4.position.y = Math.cos( time * 0.7 ) * 40;
-        light4.position.z = Math.sin( time * 0.5 ) * 30;
+        var cameraOffset = relativeCameraOffset.applyMatrix4( MovingCube.matrixWorld );
 
+        camera.position.x = cameraOffset.x;
+        camera.position.y = cameraOffset.y;
+        camera.position.z = cameraOffset.z;
+        camera.lookAt( MovingCube.position );
+
+        //camera.updateMatrix();
+        //camera.updateProjectionMatrix();
+
+        stats.update();
+    }
+
+    function render()
+    {
         renderer.render( scene, camera );
-
     }
 
 </script>
+
 </body>
 </html>

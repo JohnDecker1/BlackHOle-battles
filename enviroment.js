@@ -90,7 +90,9 @@ function init()
 	// move mouse and: left   click to rotate,
 	//                 middle click to zoom,
 	//                 right  click to pan
-	controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+	// this was removed in example for movement
+	// controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 	///////////
 	// STATS //
@@ -134,15 +136,30 @@ function init()
 	// most objects displayed are a "mesh":
 	//  a collection of points ("geometry") and
 	//  a set of surface parameters ("material")
+<
+	// create an array with six textures for a cool cube
+	var materialArray = [];
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xpos.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xneg.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/ypos.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/yneg.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zpos.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zneg.png' ) }));
+	var MovingCubeMat = new THREE.MeshFaceMaterial(materialArray);
+	var MovingCubeGeom = new THREE.CubeGeometry( 50, 50, 50, 1, 1, 1, materialArray );
+	MovingCube = new THREE.Mesh( MovingCubeGeom, MovingCubeMat );
+	MovingCube.position.set(0, 25.1, 0);
+	scene.add( MovingCube );
+
+
+	var objTank;
 	var loader = new THREE.ObjectLoader();
 	loader.load( "objects/batmobile.json", function (obj) {
 		objTank = obj;
-		objTank.material = new THREE.MeshLambertMaterial(
-			{color: 0x000000, emissive: 0x000000, vertexColors: THREE.NoColors} );
-		scene.add(objTank);
+		objTank.material = new THREE.MeshFaceMaterial		(
+			{ color: 0x000000, vertexColors: THREE.FaceColors} );
+	//	scene.add(objTank);
 	} );
-
-		var objTank;
 
 	///////////
 	// FLOOR //
@@ -179,6 +196,8 @@ function init()
 	//scene.fog = new THREE.FogExp2( 0x000000, 0.003500 );
 }
 
+    var MovingCube;
+
 function animate()
 {
     requestAnimationFrame( animate );
@@ -190,25 +209,42 @@ function update()
 {
 	// delta = change in time since last call (in seconds)
 	var delta = clock.getDelta();
-
+    var moveDistance = 200 * delta; // 200 pixels per second
+    var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
+    // this not in example
     var time = Date.now() * 0.0005;
-	var moveDistance = 200 * delta; // 200 pixels per second
-	var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
+    // local transformations
 
+    // move forwards/backwards/left/right
+    if ( keyboard.pressed("W") )
+        MovingCube.translateZ( -moveDistance );
+    if ( keyboard.pressed("S") )
+        MovingCube.translateZ(  moveDistance );
+    if ( keyboard.pressed("Q") )
+        MovingCube.translateX( -moveDistance );
+    if ( keyboard.pressed("E") )
+        MovingCube.translateX(  moveDistance );
+
+    // rotate left/right/up/down
+    var rotation_matrix = new THREE.Matrix4().identity();
+    if ( keyboard.pressed("A") )
+        MovingCube.rotateOnAxis( new THREE.Vector3(0,1,0), rotateAngle);
+    if ( keyboard.pressed("D") )
+		MovingCube.rotateOnAxis( new THREE.Vector3(0,1,0), -rotateAngle);
     //if ( mesh ) mesh.rotation.y -= 0.01;
 
 	light.position.x = Math.sin( time * 0.7 ) * 30;
 	light.position.y = Math.cos( time * 0.5 ) * 40;
 	light.position.z = Math.cos( time * 0.3 ) * 30;
 
+    var relativeCameraOffset = new THREE.Vector3(0,50,200);
 
+    var cameraOffset = relativeCameraOffset.applyMatrix4( MovingCube.matrixWorld );
 
-	var relativeCameraOffset = new THREE.Vector3(0,50,200);
-	var cameraOffset = relativeCameraOffset.applyMatrix4( MovingCube.matrixWorld );
-	camera.position.x = cameraOffset.x;
-	camera.position.y = cameraOffset.y;
-	camera.position.z = cameraOffset.z;
-	camera.lookAt( MovingCube.position );
+    camera.position.x = cameraOffset.x;
+    camera.position.y = cameraOffset.y;
+    camera.position.z = cameraOffset.z;
+    camera.lookAt( MovingCube.position );
 
 	controls.update();
 	stats.update();

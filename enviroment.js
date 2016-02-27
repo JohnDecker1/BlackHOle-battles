@@ -110,12 +110,13 @@ function init()
 	// LIGHT //
 	///////////
 
+    
 	// create a light
 	light = new THREE.PointLight(0xffffff, 3.0, 300);
 	light.position.set(50,50,50);
 	scene.add(light);
-	//var ambientLight = new THREE.AmbientLight(0x444444);
-    //scene.add(ambientLight);
+	var ambientLight = new THREE.AmbientLight(0x444444);
+    scene.add(ambientLight);
 
     var PI2 = Math.PI * 2;
     var program = function ( context ) {
@@ -224,6 +225,10 @@ function update()
         MovingCube.translateX( -moveDistance );
     if ( keyboard.pressed("E") )
         MovingCube.translateX(  moveDistance );
+    if ( keyboard.pressed("Z") )
+        MovingCube.translateY( -moveDistance );
+    if ( keyboard.pressed("X") )
+        MovingCube.translateY(  moveDistance );
 
     // rotate left/right/up/down
     var rotation_matrix = new THREE.Matrix4().identity();

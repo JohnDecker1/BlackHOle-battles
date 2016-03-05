@@ -18,6 +18,8 @@ var clock = new THREE.Clock();
 // custom global variables
 var light;
 var sphereLight;
+	var objTank;
+	var tank;
     
 // initialization
 init();
@@ -115,7 +117,7 @@ function init()
 	light = new THREE.PointLight(0xffffff, 3.0, 300);
 	light.position.set(50,50,50);
 	scene.add(light);
-	var ambientLight = new THREE.AmbientLight(0x444444);
+	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
     scene.add(ambientLight);
 
     var PI2 = Math.PI * 2;
@@ -140,12 +142,12 @@ function init()
 	//  a set of surface parameters ("material")
 	// create an array with six textures for a cool cube
 	var materialArray = [];
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xpos.png' ) }));
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/xneg.png' ) }));
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/ypos.png' ) }));
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/yneg.png' ) }));
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zpos.png' ) }));
-	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/zneg.png' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
+	materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/grass.jpg' ) }));
 	var MovingCubeMat = new THREE.MeshFaceMaterial(materialArray);
 	var MovingCubeGeom = new THREE.CubeGeometry( 50, 50, 50, 1, 1, 1, materialArray );
 	MovingCube = new THREE.Mesh( MovingCubeGeom, MovingCubeMat );
@@ -153,14 +155,23 @@ function init()
 	scene.add( MovingCube );
 
 
-	var objTank;
-	var loader = new THREE.ObjectLoader();
-	loader.load( "objects/batmobile.json", function (obj) {
-		objTank = obj;
-		objTank.material = new THREE.MeshFaceMaterial		(
-			{ color: 0x000000, vertexColors: THREE.FaceColors} );
-	//	scene.add(objTank);
-	} );
+	var loader = new THREE.JSONLoader();
+	loader.load( "objects/game.models.js", addModelToScene );
+
+
+
+	function addModelToScene(geometry, materials)
+	{
+		// for preparing animation
+		for (var i = 0; i < materials.length; i++)
+			materials[i].morphTargets = true;
+
+		material = new THREE.MeshFaceMaterial(materials);
+		objTank = new THREE.Mesh( geometry, material);
+		objTank.scale.set(10,10,10);
+		objTank.translate(10, y);
+		scene.add(objTank);
+	}
 
 	///////////
 	// FLOOR //
@@ -197,7 +208,7 @@ function init()
 	//scene.fog = new THREE.FogExp2( 0x000000, 0.003500 );
 }
 
-    var MovingCube;
+   var MovingCube;
 
 function animate()
 {
@@ -251,7 +262,7 @@ function update()
     camera.position.z = cameraOffset.z;
     camera.lookAt( MovingCube.position );
 
-	controls.update();
+	//controls.update();
 	stats.update();
 }
 

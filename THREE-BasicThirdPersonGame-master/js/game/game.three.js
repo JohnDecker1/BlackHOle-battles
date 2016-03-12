@@ -48,7 +48,7 @@ window.game.three = function() {
 			_three.renderer = new THREE.WebGLRenderer({ antialias: true });
 
 			// Set the background color (HTML background will be used if this option is omitted)
-			if (options && typeof options.rendererClearColor === "number") {
+			if (options && typeof options.rendererClearColor === "number" ) {
 				_three.renderer.setClearColor(options.rendererClearColor, 1);
 			}
 
@@ -133,7 +133,7 @@ window.game.three = function() {
 			return model;
 		},
 		createCannonGeometry: function(geometry, scale) {
-			// Preparre translation properties
+			// Prepare translation properties
 			var translateX;
 			var translateY;
 			var translateZ;

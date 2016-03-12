@@ -62,8 +62,8 @@ window.game.core = function () {
 			playerCoords: null,
 			cameraCoords: null,
 			// Camera offsets behind the player (horizontally and vertically)
-			cameraOffsetH: 240,
-			cameraOffsetV: 140,
+			cameraOffsetH: 8,
+			cameraOffsetV: 2,
 
 			// Keyboard configuration for game.events.js (controlKeys must be associated to game.events.keyboard.keyCodes)
 			controlKeys: {
@@ -311,7 +311,7 @@ window.game.core = function () {
 				var grid = new THREE.GridHelper(floorSize, floorSize / 10);
 				grid.position.z = 0.5;
 				grid.rotation.x = window.game.helpers.degToRad(90);
-				_three.scene.add(grid);
+				//_three.scene.add(grid);
 			}
 		},
 
@@ -372,9 +372,9 @@ window.game.core = function () {
 				hemiLight.position.set(0, 0, -1);
 				_three.scene.add(hemiLight);
 
-				var pointLight = new THREE.PointLight(window.game.static.colors.black, 0.2);
+				var pointLight = new THREE.PointLight(window.game.static.colors.white, 0.2);
 				pointLight.position.set(0, 0, 500);
-				_three.scene.add(pointLight);
+				//_three.scene.add(pointLight);
 				
 				// Shadow casting light
 				var spotLight = new THREE.SpotLight(window.game.static.colors.black);

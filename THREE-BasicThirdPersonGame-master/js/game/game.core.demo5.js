@@ -16,9 +16,7 @@ window.game.core = function () {
         create: function() {
             
 			// create however many lights you want
-<<<<<<< HEAD
             var numberOfLights = 20;
->>>>>>> 108c72598a51a2ad4c99474d5056ec4ec5f44a9f
             
             for (var i = 0; i < numberOfLights; i++) {
                 var newLight = {

@@ -16,7 +16,7 @@ window.game.core = function () {
         create: function() {
             
 			// create however many lights you want
-            var numberOfLights = 100;
+            var numberOfLights = 10;
             
             for (var i = 0; i < numberOfLights; i++) {
                 var newLight = {
@@ -177,8 +177,8 @@ window.game.core = function () {
 
 				// Create a player character based on an imported 3D model that was already loaded as JSON into game.models.player
 				_game.player.model = _three.createModel(window.game.models.player, 12, [
-					new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan, shading: THREE.FlatShading }),
-					new THREE.MeshLambertMaterial({ color: window.game.static.colors.green, shading: THREE.FlatShading })
+					new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan, shading: THREE.FlatShading }),
+					new THREE.MeshPhongMaterial({ color: window.game.static.colors.green, shading: THREE.FlatShading })
 				]);
 
 				// Create the shape, mesh and rigid body for the player character and assign the physics material to it
@@ -340,11 +340,16 @@ window.game.core = function () {
                 _lights.list[light].isActive = true;
                 _lights.list[light].obj3d.position.set( _game.player.rigidBody.position.x, _game.player.rigidBody.position.y, _game.player.rigidBody.position.z );
                 _lights.list[light].velocity.z = 3;
-                //_lights.list[light].velocity.x = ??;
-                //_lights.list[light].velocity.y = ??;
+               
+                var headingVector = new THREE.Vector3(_game.player.rotationRadians.x, _game.player.rotationRadians.y, 0);
+                headingVector.setLength(3);
+                
+                _lights.list[light].velocity.x = headingVector.x;//_game.player.rigidBody.position.x;
+                _lights.list[light].velocity.y = headingVector.y;//_game.player.rigidBody.position.y;
                 _lights.list[light].light.intensity = 1.0;
                 
-                console.log("You shot!");
+                console.log("x:" + _lights.list[light].velocity.x + ", y:" + _lights.list[light].velocity.y);
+                //console.log("You shot!");
                 
                 
                 

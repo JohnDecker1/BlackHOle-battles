@@ -16,7 +16,9 @@ window.game.core = function () {
         create: function() {
             
 			// create however many lights you want
-            var numberOfLights = 10;
+<<<<<<< HEAD
+            var numberOfLights = 20;
+>>>>>>> 108c72598a51a2ad4c99474d5056ec4ec5f44a9f
             
             for (var i = 0; i < numberOfLights; i++) {
                 var newLight = {
@@ -40,7 +42,7 @@ window.game.core = function () {
                 _lights.list.push(newLight);
                 var index = _lights.list.length - 1;
                 
-                _lights.list[index].light = new THREE.PointLight(window.game.static.colors.white, 0.0, 300);
+                _lights.list[index].light = new THREE.PointLight(window.game.static.colors.white, 0.0, 3000);
                 _lights.list[index].marker = new THREE.Mesh( new THREE.SphereGeometry(2, 32, 16), new THREE.MeshBasicMaterial( { color: window.game.static.colors.white } ) );
                 _lights.list[index].obj3d = new THREE.Object3D();
                 _lights.list[index].obj3d.add(_lights.list[index].light);

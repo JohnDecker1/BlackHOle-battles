@@ -7,6 +7,105 @@
 window.game = window.game || {};
 
 window.game.core = function () {
+    var _lights = {
+        list: [],  
+        
+        gravity: .1,
+        
+        // methods
+        create: function() {
+            
+			// create however many lights you want
+            var numberOfLights = 100;
+            
+            for (var i = 0; i < numberOfLights; i++) {
+                var newLight = {
+                    obj3d: null,
+                    light: null,
+                    marker: null,
+                
+                    isActive: false,
+                
+                    isGrounded: false,
+                    mass: 1,
+                                    
+                    velocity: {
+                        x: 0,
+                        y: 0,
+                        z: 2
+                    }
+                
+                    
+                };
+                _lights.list.push(newLight);
+                var index = _lights.list.length - 1;
+                
+                _lights.list[index].light = new THREE.PointLight(window.game.static.colors.white, 0.0, 300);
+                _lights.list[index].marker = new THREE.Mesh( new THREE.SphereGeometry(2, 32, 16), new THREE.MeshBasicMaterial( { color: window.game.static.colors.white } ) );
+                _lights.list[index].obj3d = new THREE.Object3D();
+                _lights.list[index].obj3d.add(_lights.list[index].light);
+                _lights.list[index].obj3d.add(_lights.list[index].marker);
+                _lights.list[index].obj3d.position.set(0, 0, -20);
+                _three.scene.add(_lights.list[index].obj3d);
+                
+                
+            }
+            
+            
+        },
+        
+        update: function () {
+            // go through each light and update its position using the velocities (and changing the z velocity by the gravity)
+            
+            for (var i = 0; i < _lights.list.length; i++) {
+                
+                if (_lights.list[i].isActive === true && _lights.list[i].obj3d !== null) {
+                
+                    //system.log("Trying index " + i + ": ");
+                    
+                    
+                    
+                    // update coordinates
+                    _lights.list[i].obj3d.position.x = _lights.list[i].obj3d.position.x + _lights.list[i].velocity.x;
+                    _lights.list[i].obj3d.position.y = _lights.list[i].obj3d.position.y + _lights.list[i].velocity.y;
+                    _lights.list[i].velocity.z -= _lights.gravity;
+                    _lights.list[i].obj3d.position.z = _lights.list[i].obj3d.position.z + _lights.list[i].velocity.z;
+                
+                    // check to see if the light is out of bounds
+                    // if so, reset it to intensity 0 and move it under the floor again and mark it inactive
+                    if (_lights.list[i].obj3d.position.z < -20) {
+                        _lights.list[i].obj3d.position.set(0, 0, -20);
+                        _lights.list[i].light.intensity = 0.0;
+                        _lights.list[i].isActive = false;
+                        console.log("Resetting light #" + i);
+                    }   
+                                    
+                }
+                
+            }
+            
+        },
+        reset: function () {
+            for (var i = 0; i < _lights.list.length; i++) {
+                    
+                _lights.list[i].obj3d.position.set(0, 0, -20);
+                _lights.list[i].light.intensity = 0.0;
+                _lights.list[i].isActive = false;
+                        
+            }
+        },
+        destroy: function () {
+            for (var i = 0; i < _lights.list.length; i++) {
+                    
+                _lights.list[i].obj3d = null;
+                _lights.list[i].light = null;
+                _lights.list[i].marker = null;
+                _lights.list[i] = null;
+                        
+            }
+            
+        }
+    };
 	var _game = {
 		// Attributes
 		player: {
@@ -75,7 +174,7 @@ window.game.core = function () {
 			},
 			
 			// Methods
-			create: function() {
+			create: function () {
 				// Create a global physics material for the player which will be used as ContactMaterial for all other objects in the level
 				_cannon.playerPhysicsMaterial = new CANNON.Material("playerMaterial");
 
@@ -115,6 +214,9 @@ window.game.core = function () {
 						_game.player.isGrounded = (new CANNON.Ray(_game.player.mesh.position, new CANNON.Vec3(0, 0, -1)).intersectBody(event.contact.bi).length > 0);
 					}
 				});
+                
+                // initialize the lights array
+                //_lights.list
 			},
 			update: function() {
 				// Basic game logic to update player and camera
@@ -167,7 +269,8 @@ window.game.core = function () {
 			processUserInput: function() {
 				// Jump
 				if (_events.keyboard.pressed[_game.player.controlKeys.jump]) {
-					_game.player.jump();
+					//_game.player.jump();
+                    _game.player.shoot();
 				}
 
 				// Movement: forward, backward, left, right
@@ -220,6 +323,36 @@ window.game.core = function () {
 					_game.player.rigidBody.velocity.z = _game.player.jumpHeight;
 				}
 			},
+            shoot: function() {
+                // find the first available shot
+                var light = null;
+                
+                // this *should* iterate through each light in the list and find the index of the first non-active one
+                for (var i = 0; i < _lights.list.length && light === null; i++){
+                    if (!_lights.list[i].isActive)
+                        light = i;
+                }
+                
+                //console.log("Completed the loop with index " + light);
+
+                // exit early because there was no available shot
+                if (light === null)
+                    return;
+                
+                // set the position, intensity, and status of the light
+                _lights.list[light].isActive = true;
+                _lights.list[light].obj3d.position.set( _game.player.rigidBody.position.x, _game.player.rigidBody.position.y, _game.player.rigidBody.position.z );
+                _lights.list[light].velocity.z = 3;
+                //_lights.list[light].velocity.x = ??;
+                //_lights.list[light].velocity.y = ??;
+                _lights.list[light].light.intensity = 1.0;
+                
+                console.log("You shot!");
+                
+                
+                
+                
+            },
 			updateOrientation: function() {
 				// Convert player's Quaternion to Euler radians and save them to _game.player.rotationRadians
 				_game.player.rotationRadians = new THREE.Euler().setFromQuaternion(_game.player.rigidBody.quaternion);
@@ -262,7 +395,7 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(floorSize, floorSize, floorHeight)),
 					mass: 0,
 					position: new CANNON.Vec3(0, 0, -floorHeight),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.black }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
@@ -271,7 +404,7 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 					mass: 0,
 					position: new CANNON.Vec3(-240, -200, 30 - 1),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
@@ -279,7 +412,7 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 					mass: 0,
 					position: new CANNON.Vec3(-300, -260, 90),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
@@ -287,7 +420,7 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 					mass: 0,
 					position: new CANNON.Vec3(-180, -200, 150),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
@@ -295,7 +428,7 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 					mass: 0,
 					position: new CANNON.Vec3(-120, -140, 210),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
@@ -303,17 +436,18 @@ window.game.core = function () {
 					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 					mass: 0,
 					position: new CANNON.Vec3(-60, -80, 270),
-					meshMaterial: new THREE.MeshLambertMaterial({ color: window.game.static.colors.cyan }),
+					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
 					physicsMaterial: _cannon.solidMaterial
 				});
 
 				// Grid Helper
-				var grid = new THREE.GridHelper(floorSize, floorSize / 10);
-				grid.position.z = 0.5;
-				grid.rotation.x = window.game.helpers.degToRad(90);
+				//var grid = new THREE.GridHelper(floorSize, floorSize / 10);
+				//grid.position.z = 0.5;
+				//grid.rotation.x = window.game.helpers.degToRad(90);
 				//_three.scene.add(grid);
 			}
 		},
+        
 
 		// Methods
 		init: function(options) {
@@ -343,7 +477,10 @@ window.game.core = function () {
 
 			// Create player and level again
 			_game.player.create();
-			_game.level.create();
+			_game.level.create();      
+            
+            // reset the lights
+            _lights.reset();
 
 			// Continue with the game loop
 			_game.loop();
@@ -355,6 +492,9 @@ window.game.core = function () {
 			// Update Cannon.js world and player state
 			_cannon.updatePhysics();
 			_game.player.update();
+            
+            // Update the lights
+            _lights.update();
 
 			// Render visual scene
 			_three.render();
@@ -393,6 +533,8 @@ window.game.core = function () {
 				spotLight.shadowCameraVisible = true;
 				
 				_three.scene.add(spotLight);
+                
+                _lights.create();
 			};
 
 			// Initialize components with options
@@ -407,9 +549,9 @@ window.game.core = function () {
 
 			// Add specific events for key down
 			_events.onKeyDown = function () {
-				if (!_ui.hasClass("infoboxIntro", "fade-out")) {
-					_ui.fadeOut("infoboxIntro");
-				}
+				//if (!_ui.hasClass("infoboxIntro", "fade-out")) {
+				//	_ui.fadeOut("infoboxIntro");
+				//}
 			};
 		}
 	};

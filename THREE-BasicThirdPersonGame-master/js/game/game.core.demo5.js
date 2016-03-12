@@ -94,13 +94,10 @@ window.game.core = function () {
                         
             }
         },
-        destroy: function () {
+        readd: function () {
             for (var i = 0; i < _lights.list.length; i++) {
                     
-                _lights.list[i].obj3d = null;
-                _lights.list[i].light = null;
-                _lights.list[i].marker = null;
-                _lights.list[i] = null;
+                _three.scene.add(_lights.list[i].obj3d);
                         
             }
             
@@ -479,8 +476,8 @@ window.game.core = function () {
 			_game.player.create();
 			_game.level.create();      
             
-            // reset the lights
-            _lights.reset();
+            // readd the lights to the scene
+            _lights.readd();
 
 			// Continue with the game loop
 			_game.loop();

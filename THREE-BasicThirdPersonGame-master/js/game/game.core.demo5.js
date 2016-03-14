@@ -389,7 +389,7 @@ window.game.core = function () {
 				_cannon.solidMaterial = _cannon.createPhysicsMaterial(new CANNON.Material("solidMaterial"), 0, 0.1);
 
 				// Define floor settings
-				var floorSize = 800;
+				var floorSize = 10000;
 				var floorHeight = 20;
 
 				// Add a floor
@@ -402,45 +402,18 @@ window.game.core = function () {
 				});
 
 				// Add some boxes
-				_cannon.createRigidBody({
-					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
-					mass: 0,
-					position: new CANNON.Vec3(-240, -200, 30 - 1),
-					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
-					physicsMaterial: _cannon.solidMaterial
-				});
+				var count = 0;
+				while(count < 10) {
 
-				_cannon.createRigidBody({
-					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
-					mass: 0,
-					position: new CANNON.Vec3(-300, -260, 90),
-					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
-					physicsMaterial: _cannon.solidMaterial
-				});
-
-				_cannon.createRigidBody({
-					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
-					mass: 0,
-					position: new CANNON.Vec3(-180, -200, 150),
-					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
-					physicsMaterial: _cannon.solidMaterial
-				});
-
-				_cannon.createRigidBody({
-					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
-					mass: 0,
-					position: new CANNON.Vec3(-120, -140, 210),
-					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
-					physicsMaterial: _cannon.solidMaterial
-				});
-
-				_cannon.createRigidBody({
-					shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
-					mass: 0,
-					position: new CANNON.Vec3(-60, -80, 270),
-					meshMaterial: new THREE.MeshPhongMaterial({ color: window.game.static.colors.cyan }),
-					physicsMaterial: _cannon.solidMaterial
-				});
+					_cannon.createRigidBody({
+						shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
+						mass: 0,
+						position: new CANNON.Vec3(Math.floor((Math.random() * 1000) + 1),Math.floor((Math.random() * 1000) + 1), 20),
+						meshMaterial: new THREE.MeshPhongMaterial({color: window.game.static.colors.cyan}),
+						physicsMaterial: _cannon.solidMaterial
+					});
+					count++;
+				}
 
 				// Grid Helper
 				//var grid = new THREE.GridHelper(floorSize, floorSize / 10);

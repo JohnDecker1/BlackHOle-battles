@@ -339,16 +339,16 @@ window.game.core = function () {
                 // set the position, intensity, and status of the light
                 _lights.list[light].isActive = true;
                 _lights.list[light].obj3d.position.set( _game.player.rigidBody.position.x, _game.player.rigidBody.position.y, _game.player.rigidBody.position.z );
-                _lights.list[light].velocity.z = 3;
-               
-                var headingVector = new THREE.Vector3(_game.player.rotationRadians.x, _game.player.rotationRadians.y, 0);
-                headingVector.setLength(3);
                 
-                _lights.list[light].velocity.x = headingVector.x;//_game.player.rigidBody.position.x;
-                _lights.list[light].velocity.y = headingVector.y;//_game.player.rigidBody.position.y;
+                // get the X & Y coordinates based off of the Z rotation using desired length + rotation
+                var cartesianCoords = window.game.helpers.polarToCartesian(50, _game.player.rotationRadians.z)
+                
+                _lights.list[light].velocity.x = -1.0 * cartesianCoords.x; //headingVector.x;//_game.player.rigidBody.position.x;
+                _lights.list[light].velocity.y = -1.0 * cartesianCoords.y; //headingVector.y;//_game.player.rigidBody.position.y;
+                _lights.list[light].velocity.z = 1;
                 _lights.list[light].light.intensity = 1.0;
                 
-                console.log("x:" + _lights.list[light].velocity.x + ", y:" + _lights.list[light].velocity.y);
+                //console.log("x:" + _lights.list[light].velocity.x + ", y:" + _lights.list[light].velocity.y);
                 //console.log("You shot!");
                 
                 
@@ -494,10 +494,13 @@ window.game.core = function () {
 			_game.player.update();
             
             // Update the lights
-            _lights.update();
+            //_lights.update();
 
 			// Render visual scene
 			_three.render();
+            
+            // Update the lights
+            _lights.update();
 		},
 		initComponents: function (options) {
 			// Reference game components one time

@@ -408,10 +408,35 @@ window.game.core = function () {
 					_cannon.createRigidBody({
 						shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
 						mass: 0,
-						position: new CANNON.Vec3(Math.floor((Math.random() * 1000) + 1),Math.floor((Math.random() * 1000) + 1), 20),
+						position: new CANNON.Vec3(Math.floor((Math.random() * 1000) + 50),Math.floor((Math.random() * 1000) + 50), 20),
 						meshMaterial: new THREE.MeshPhongMaterial({color: window.game.static.colors.cyan}),
 						physicsMaterial: _cannon.solidMaterial
 					});
+                    
+                    _cannon.createRigidBody({
+						shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
+						mass: 0,
+						position: new CANNON.Vec3(-1 * Math.floor((Math.random() * 1000) + 50),Math.floor((Math.random() * 1000) + 50), 20),
+						meshMaterial: new THREE.MeshPhongMaterial({color: window.game.static.colors.cyan}),
+						physicsMaterial: _cannon.solidMaterial
+					});
+                    
+                    _cannon.createRigidBody({
+						shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
+						mass: 0,
+						position: new CANNON.Vec3(Math.floor((Math.random() * 1000) + 50),Math.floor(-1 * (Math.random() * 1000) + 50), 20),
+						meshMaterial: new THREE.MeshPhongMaterial({color: window.game.static.colors.cyan}),
+						physicsMaterial: _cannon.solidMaterial
+					});
+                    
+                    _cannon.createRigidBody({
+						shape: new CANNON.Box(new CANNON.Vec3(30, 30, 30)),
+						mass: 0,
+						position: new CANNON.Vec3(Math.floor(-1 * (Math.random() * 1000) + 50),Math.floor(-1 * (Math.random() * 1000) + 50), 20),
+						meshMaterial: new THREE.MeshPhongMaterial({color: window.game.static.colors.cyan}),
+						physicsMaterial: _cannon.solidMaterial
+					});
+                    
 					count++;
 				}
 

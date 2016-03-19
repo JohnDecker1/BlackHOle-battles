@@ -77,7 +77,7 @@ window.game.core = function () {
                         _lights.list[i].obj3d.position.set(0, 0, -20);
                         _lights.list[i].light.intensity = 0.0;
                         _lights.list[i].isActive = false;
-                        console.log("Resetting light #" + i);
+                        //console.log("Resetting light #" + i);
                     }   
                                     
                 }
@@ -505,7 +505,7 @@ window.game.core = function () {
 				spotLight.shadowCameraFar = 3000;
 				spotLight.shadowCameraFov = 70;
 				
-				spotLight.shadowCameraVisible = true;
+				spotLight.shadowCameraVisible = false;
 				
 				_three.scene.add(spotLight);
                 

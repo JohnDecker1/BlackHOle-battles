@@ -158,8 +158,8 @@ window.game.core = function () {
 			playerCoords: null,
 			cameraCoords: null,
 			// Camera offsets behind the player (horizontally and vertically)
-			cameraOffsetH: 8,
-			cameraOffsetV: 2,
+			cameraOffsetH: 80,
+			cameraOffsetV: 10,
 
 			// Keyboard configuration for game.events.js (controlKeys must be associated to game.events.keyboard.keyCodes)
 			controlKeys: {

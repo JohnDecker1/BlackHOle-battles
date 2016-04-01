@@ -40,8 +40,8 @@ window.game.core = function () {
                 _lights.list.push(newLight);
                 var index = _lights.list.length - 1;
                 
-                _lights.list[index].light = new THREE.PointLight(window.game.static.colors.white, 0.0, 3000);
-                _lights.list[index].marker = new THREE.Mesh( new THREE.SphereGeometry(2, 32, 16), new THREE.MeshBasicMaterial( { color: window.game.static.colors.white } ) );
+                _lights.list[index].light = new THREE.PointLight(window.game.static.colors.green, 0.0, 400);
+                _lights.list[index].marker = new THREE.Mesh( new THREE.SphereGeometry(2, 32, 16), new THREE.MeshBasicMaterial( { color: window.game.static.colors.green } ) );
                 _lights.list[index].obj3d = new THREE.Object3D();
                 _lights.list[index].obj3d.add(_lights.list[index].light);
                 _lights.list[index].obj3d.add(_lights.list[index].marker);

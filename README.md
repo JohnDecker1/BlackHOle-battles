@@ -1,6 +1,2 @@
-# BlackHOle-battles
-This is for CS312 graphics class working with THREE.js libraries
-Authors:
-John Decker
-John Michelsen
-Johnson, Kevin
+# BlackholeBattles.github.io
+This is a hosted github repository for THREE.js applied project
